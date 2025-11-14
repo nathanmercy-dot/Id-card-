@@ -10,25 +10,23 @@ const fetchData = {
 let alluser = document.querySelector("#allUser");
 
 fetch(url, fetchData)
-  .then(function (res) {
-    return res.json();
-  })
-  .then(function (data) {
+  .then((res) => res.json())
+  .then((data) => {
     const res = data.users;
-    console.log(res);
+
     alluser.innerHTML = res
-      .map(function (value) {
+      .slice(0, 25) // show only first 25 if you need
+      .map((value) => {
         return `
         <div class="eachProduct">
-        <img src="${value.image}" alt="">
-        <p><b>First Name:</b>${value.firstName}</p>
-        <p><b>Role:</b>${value.role}</p>
-        <p><b>Last Name:</b>${value.lastName}</p>
-        <p><b>Sex:</b>${value.gender}</p>
-        <p><b>Phone Number:</b>${value.phone}</p>
-        <p><b>SSN:</b>${value.ssn}</p>
-        </div>
-        `;
+          <img src="${value.image}" alt="User Image">
+          <p><b>First Name:</b> ${value.firstName}</p>
+          <p><b>Last Name:</b> ${value.lastName}</p>
+          <p><b>Role:</b> ${value.role}</p>
+          <p><b>Sex:</b> ${value.gender}</p>
+          <p><b>Phone Number:</b> ${value.phone}</p>
+          <p><b>SSN:</b> ${value.ssn}</p>
+        </div>`;
       })
       .join("");
   });
